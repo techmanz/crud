@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="favicon.png">
+	<meta content="Apple-servise - ремонт iPhone, iPad, Mac в  иеве" name="keywords">
+	<meta content="Apple-servise - ремонт iPhone, iPad, Mac в  иеве" name="description">
+	<meta name="author" content="Apple-servise">
+
+	<title>Главная</title>
+
+	<!-- Systems JS -->
+	<!-- jQuery -->
+	<?php echo $this->tag->javascriptInclude("js/jquery-1.11.3.min.js"); ?>
+	<!--<script src="js/jquery-1.11.3.min.js"></script>-->
+
+	
+	<!-- Bootstrap core -->
+	<?php echo $this->tag->stylesheetLink("bootstrap/css/bootstrap.css"); ?>
+	<?php echo $this->tag->javascriptInclude("bootstrap/js/bootstrap.min.js"); ?>
+	<!--<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<script src="bootstrap/js/bootstrap.min.js"></script>-->
+
+
+	<!-- For Test -->
+	<!--<link href="css/_style.css" rel="stylesheet">-->
+
+
+	<!-- CUSTOMIZE -->
+	<!-- Custom styles -->
+	<link href="css/main.css" rel="stylesheet">
+	<!-- Custom JS -->
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <?php echo $this->tag->linkTo(array("", "CRUD", 'class'=>'navbar-brand')); ?>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><?php echo $this->tag->linkTo("products", "Products"); ?></li>
+      </ul>
+	  
+	  <ul class="nav navbar-nav navbar-right">
+		<?php if( ! User::getAuth()) { ?>
+		<li>
+			<a href="#" type="button" class="" data-toggle="modal" data-target="#login">Sign In/Sign Up</a>
+		</li>
+		<?php } ?>
+		<?php if(User::getAuth()) { ?>
+		<li>
+			<?php echo $this->tag->linkTo("session/end", "Log Out"); ?>
+		</li>
+		<?php } ?>
+	  </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+	<?php $this->flash->output() ?>
+	<?php echo $this->getContent() ?>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+    <div class="col-md-6">
+        <div class="page-header">
+            <h2>Log In</h2>
+        </div>
+		<?php echo $this->tag->form(array("session/start", "method" => "post", 'role'=>'form')) ?>
+        <!-- <form method="post" role="form" action="/crud/session/start"> -->            <fieldset>
+                <div class="form-group">
+                    <label for="email">Login/Email</label>
+                    <div class="controls">
+                        <input type="text" class="form-control" value="admin" name="email" id="email">                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" class="form-control" value="12345" name="password" id="password">                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-large" value="Login">                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="page-header">
+            <h2>Don't have an account yet?</h2>
+        </div>
+
+        <p>Create an account offers the following advantages:</p>
+        <ul>
+            <li>Create, track and export your invoices online</li>
+            <li>Gain critical insights into how your business is doing</li>
+            <li>Stay informed about promotions and special packages</li>
+        </ul>
+
+        <div class="clearfix center">
+			<?php echo $this->tag->linkTo(array("register", "Sign Up!", "class" => "btn btn-primary btn-large btn-success")); ?>
+                    </div>
+    </div>
+
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

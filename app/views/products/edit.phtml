@@ -1,0 +1,33 @@
+<h1>Edit Product</h1>
+
+<?php echo $this->tag->form(array("products/save/{$product->id}", "method" => "post", 'role'=>'form')) ?>
+	<fieldset>
+		<div class="form-group">
+			<label for="name">Name</label>
+			<div class="controls">
+			<input type="text" class="form-control" value="<?php echo $product->name;?>" name="name" id="name">                    </div>
+		</div>
+		<div class="form-group">
+			<label for="price">Price</label>
+			<div class="controls">
+			<input type="text" class="form-control" value="<?php echo $product->price;?>" name="price" id="price">                    </div>
+		</div>
+		<div class="form-group">
+			<label for="type">Type</label>
+			<?php echo Phalcon\Tag::select(array(
+				"typeId",
+				Type::find(),
+				"using" => array("id", "name"),
+				'value' => $product->typeId,
+				'class' => 'form-control',
+			)); ?>
+		</div>
+		<div class="form-group">
+			<label for="status">Status</label>
+			<input type="text" class="form-control" value="<?php echo $product->status;?>" name="status" id="status">
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary btn-large" value="Save">
+		</div>
+	</fieldset>
+</form>

@@ -1,0 +1,24 @@
+<h1>Register</h1>
+
+<?php echo $this->tag->form(array("register", "method" => "post", 'role'=>'form')) ?>
+	<fieldset>
+		<div class="form-group">
+			<label for="login">Login</label>
+			<div class="controls">
+			<input type="text" class="form-control" value="" name="login" id="login">                    </div>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<div class="controls">
+			<input type="text" class="form-control" value="" name="email" id="email">                    </div>
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<div class="controls">
+			<input type="password" class="form-control" value="" name="password" id="password">                    </div>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary btn-large" value="Login">
+		</div>
+	</fieldset>
+</form>

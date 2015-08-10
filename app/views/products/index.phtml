@@ -1,0 +1,41 @@
+
+<table class="table table-bordered table-striped" align="center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>User</th>
+            <th>Product Type</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+		<?php foreach($products as $product) { ?>
+        <tr>
+            <td><?php echo $product->id; ?></td>
+            <td><?php echo $product->name; ?></td>
+            <td><?php echo $product->user->login; ?></td>
+            <td><?php echo $product->type->name; ?></td>
+            <td><?php echo $product->price; ?></td>
+            <td><?php echo $product->status; ?></td>
+			
+			<?php if(User::getAuth()['id'] == $product->userId) {  ?>
+            <td width="7%">
+				<?php echo $this->tag->linkTo(array("products/edit/{$product->id}", '<i class="glyphicon glyphicon-edit"></i>Edit', 'class'=>'btn btn-default')); ?>
+			</td>
+            <td width="7%">
+				<?php echo $this->tag->linkTo(array("products/delete/{$product->id}", '<i class="glyphicon glyphicon-remove"></i>Delete', 'class'=>'btn btn-default')); ?>
+			</td>
+			<?php } ?>
+			
+        </tr>
+		<?php } ?>
+    </tbody>
+</table>
+<?php 
+if(User::getAuth()) {
+	echo $this->tag->linkTo(array("products/new", '<i class="glyphicon glyphicon-plus"></i> Create', 'class'=>'btn btn-default'));
+}
+?>
